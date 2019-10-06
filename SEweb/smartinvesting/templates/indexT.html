@@ -16,6 +16,68 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 </style>
+
+
+
+<script>
+
+var dict = {
+  '1':['ADVANC','DTAC','INTUCT','TRUE'],
+  '2':['AOT','BEM','BTS'],
+  '3':['BANPU',	'RATCH','BGRIM','TOP','BPP'	,'EA','EGCO','GPSC'	,'GULF'	,'IRPC'	,'PTT','PTTEP'],
+  '4':['BBL','KBANK','KKP',,'KTB','SCB','TCAP','TISCO','TMB'],
+  '5':['BDMS','BH'],
+  '6':['BJC','CPALL','GLOBAL','HMPRO','ROBINS'],
+  '7':['CBG','CPF','MINT','OSO','TU'],
+  '8':['CPN','LH','WHA'],
+  '9':['DELTA'],
+  '10':['IVL','PTTGC'],
+  '11':['KTC','MTC','SAWAD'],
+  '12':['SCC','TOA']
+};
+window.onload = function () {
+
+var s50 = ['ADVANC','AOT','BANPU','BBL','BDMS','BEM','BGRIM','BH','BJC','BPP','BTS','CBG','CPALL','CPF','CPN',
+'DELTA','DTAC','EA','EGCO','GLOBAL','GPSC','GULF','HMPRO','INTUCH','IRPC','IVL','KBANK','KKP','KTB','KTC','LH',
+'MINT','MTC','OSP','PTT','PTTEP','PTTGC','RATCH','ROBINS','SAWAD','SCB','SCC','TCAP','TISCO','TMB','TOA','TOP',
+'TRUE','TU','WHA' ];
+console.log(s50.length);
+
+var selectList = document.getElementById('set50');
+//Create and append the options
+for (var i = 0; i < s50.length; i++) {
+    var option = document.createElement("option");
+    option.value = s50[i];
+    option.text = s50[i];
+    selectList.appendChild(option);
+}
+
+
+console.log(gr);}
+function showgr(params) {
+  console.log(dict[params.value]);
+  // console.log(params.value);
+  // dict[]
+  var selectList = document.getElementById('set50');
+
+  selectList.innerHTML='';
+  var dop = document.createElement("option");
+  dop.text = ' -- เลือก หุ้น -- ' ;
+  dop.disabled = true;
+  dop.selected = true;
+  selectList.appendChild(dop);
+  var ss = dict[params.value];
+  for (var i = 0; i < ss.length; i++) {
+    var option = document.createElement("option");
+    option.value = ss[i];
+    option.text = ss[i];
+    selectList.appendChild(option);
+}
+};
+</script>
+
+
+
 <body background="https://cypherbits.net/wp-content/uploads/2019/04/bannernoticias22.jpg" class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
@@ -57,29 +119,15 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <h1 class="w3-jumbo"><span class="w3-hide-small">Smart</span> Investing.</h1>
     <p>We are investment consultants.</p>
     <img src="https://brandinside.asia/wp-content/uploads/2018/07/shutterstock_4758081643Fa3.jpg" alt="boy" class="w3-image" width="992" height="1108">
-    <!-- <h1 class="w3-jumbo"><span class="w3-hide-small">Register</span></h1>
-    <div>
-        <form action="/action_page.php" target="_blank">
-            <p>E-Mail</p>
-            <p><input class="w3-input w3-border" type="text" placeholder="E-Mail" name="mail" required></p>
-            
-            <p>Password</p>
-            <p><input class="w3-input w3-border" type="password" placeholder="Password" name="pass" required></p>
 
-            <p>Re-Password</p>
-            <p><input class="w3-input w3-border" type="password" placeholder="Re-Password" name="repass" required></p>
-
-            <button type="submit" class="w3-button w3-block w3-black">Send</button>
-        </form>
-    </div> -->
   </header>
 
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="news">
     <h2 class="w3-text-light-grey">Inves NewsTo day</h2>
-    <hr style="width:200px" class="w3-opacity"> 
+    <hr style="width:200px" class="w3-opacity">
     <div>
-      <table style="width:100%"> 
+      <table style="width:100%">
         <!-- <tr>
           <th>news</th>
           <th>news</th>
@@ -87,34 +135,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </tr> -->
         <tr>
           <td colspan="2">หัวข้อข่าว</td>
-          
+
           <td><a href="">อ่านต่อ</a></td>
         </tr>
-        <!-- <tr>
-          <td>news</td>
-          <td>news</td>
-          <td>news</td>
-        </tr>
-        <tr>
-          <td>news</td>
-          <td>news</td>
-          <td>news</td>
-        </tr>
-        <tr>
-          <td>news</td>
-          <td>news</td>
-          <td>news</td>
-        </tr>
-        <tr>
-          <td>news</td>
-          <td>news</td>
-          <td>news</td>
-        </tr>
-        <tr>
-          <td>news</td>
-          <td>news</td>
-          <td>news</td>
-        </tr> -->
+
       </table>
     </div>
   <!-- Portfolio Section -->
@@ -127,7 +151,30 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         <form action='/cal/' method="POST">
           {% csrf_token %}
             <p>เลือกประเภทหุ้น</p>
-            <p><input class="w3-input w3-border" type="text" placeholder="select set50" name="set50" required></p>
+            <p>
+              <select name="gr" id='gr' onchange="showgr(this)">
+                <option disabled selected value> -- เลือก หมวดธุรกิจ -- </option>
+                <!-- <option selected="">หมวดธุรกิจ </option> -->
+                <option value="1" >เทคโนโลยีสารสนเทศและการสื่อสาร</option>
+                <option value="2">ขนส่งและโลจิสติกส์</option>
+                <option value="3">พลังงานและสาธารณูปโภค</option>
+                <option value="4">ธนาคาร</option>
+                <option value="5">การแพทย์</option>
+                <option value="6">พาณิชย์</option>
+                <option value="7">อาหารและเครื่องดื่ม</option>
+                <option value="8">พัฒนาอสังหาริมทรัพย์</option>
+                <option value="9">ชิ้นส่วนอิเล็กทรอนิกส์</option>
+                <option value="10">ปิโตรเคมีและเคมีภัณฑ์</option>
+                <option value="11">เงินทุนและหลักทรัพย์</option>
+                <option value="12">วัสดุก่อสร้าง</option>
+              </select>
+            </p>
+            <p>
+              <select name='set50'  id='set50' required>
+                  <option disabled selected value> -- เลือก หุ้น -- </option>
+
+              </select>
+            </p>
             <p>ตั้งแต่</p>
             <p><input class="w3-input w3-border" type="date" placeholder="Sday" name="Sday" required></p>
             <p>จนถึง</p>
@@ -138,34 +185,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   </div>
 
-  <!-- Contact Section -->
-  <!-- <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
-    <h2 class="w3-text-light-grey">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
-
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Ubon, TH</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: 06 44305025</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: </p>
-    </div><br>
-    <p>Lets get in touch. Send me a message:</p>
-
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
-      <p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
-        </button>
-      </p>
-    </form>
-  
-  </div> -->
-  <!-- End Contact Section -->
-  
-    <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>

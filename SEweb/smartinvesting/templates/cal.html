@@ -1,18 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <table>
-    {% for i in result %}<tr>
-     {% for j in i %}
-      <td>{{j}}</td>  
-     {%endfor%}</tr>
-    {%endfor%}
+<html>
+<title>Smart Investing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+<script>
+        window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: '{{ set }}'
+            },
+            axisX:{
+                valueFormatString: "DD MMM",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true
+                }
+            },
+            axisY: {
+                title: "ราคา",
+                crosshair: {
+                    enabled: true
+                }
+            },
+            toolTip:{
+                shared:true
+            },
+            legend:{
+                cursor:"pointer",
+                verticalAlign: "bottom",
+                horizontalAlign: "left",
+                dockInsidePlotArea: true,
+                itemclick: toogleDataSeries
+            },
+            data: [{
+                type: "line",
+                showInLegend: true,
+                name: "ราคาตามจริง",
+                markerType: "square",
+                lineDashType: "dash",
+                xValueFormatString: "DD MMM, YYYY",
+                color: "#F08080",
+                dataPoints: [
+                    {% for i in yr %}
+                    {{i}}
+                    {%endfor%}
+                    // { x: new Date(2017, 0, 3), y: 650 },
+                    // { x: new Date(2017, 0, 4), y: 700 },
+                    // { x: new Date(2017, 0, 5), y: 710 },
+                    // { x: new Date(2017, 0, 6), y: 658 },
+                    // { x: new Date(2017, 0, 7), y: 734 },
+                    // { x: new Date(2017, 0, 8), y: 963 },
+
+                    // { x: new Date(2017, 0, 10), y: 853 },
+                    // { x: new Date(2017, 0, 11), y: 869 },
+                    // { x: new Date(2017, 0, 12), y: 943 },
+                    // { x: new Date(2017, 0, 13), y: 970 },
+                    // { x: new Date(2017, 0, 14), y: 869 },
+                    // { x: new Date(2017, 0, 15), y: 890 },
+                    // { x: new Date(2017, 0, 16), y: 930 }
+                ]
+            },
+            {
+                type: "line",
+                showInLegend: true,
+                name: "ราคาคาดคะเน",
+                // lineDashType: "dash",
+                dataPoints: [
+
+                    {% for j in yp %}
+                    {{j}}
+                    {%endfor%}
+                    // { x: new Date(2017, 0, 9), y: 657 },
+                    // { x: new Date(2017, 0, 10), y: 663 },
+                    // { x: new Date(2017, 0, 11), y: 639 },
+                    // { x: new Date(2017, 0, 12), y: 673 },
+
+                    // { x: new Date(2017, 0, 15), y: 643 },
+
+                ]
+            }]
+        });
+        chart.render();
+
+        function toogleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else{
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+
+        }
+        </script>
+
+
+
+
+<body background="https://cypherbits.net/wp-content/uploads/2019/04/bannernoticias22.jpg" class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center" style="width: 5%;margin: auto;">
+  <!-- Avatar image in top left corner -->
+  <img src="https://www.levelaccess.com/wp-content/uploads/2017/09/Blog_icon_financial_1.png" style="width:100%">
+  <a href="../" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="../" class="w3-bar-item w3-button" style="width:15% !important">HOME</a>
+    <!-- <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a> -->
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="top">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" >
+    <h1 class="w3-big"><span class="w3-hide-small">{{ set }}</span> </h1>
+
+    <!-- <img src="data:image/png;base64,{{image_base64}}" alt="some text to display to your users when the image does not show correctly" width=500 height=auto /> -->
+<div  id="chartContainer" style="height: 370px; width: 80%;margin: auto;"></div>
+
+<table class="w3-table " style="width:80%;margin: auto;text-align: center;">
+    <tr>
+    <th>วันที่</th>  <th>ราคาตามจริง</th><th>ราคาคาดการณ์</th>
+</tr>
+{% for i in result %}<tr>
+{% for j in i %}
+<td>{{j}}</td>
+{%endfor%}</tr>
+{%endfor%}
 </table>
+  </header>
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
